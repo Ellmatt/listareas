@@ -3,7 +3,7 @@ const ItemTarea = () => {
     return (
         
           <ListGroup.Item className="d-flex justify-content-between">
-            Tarea de Prueba 
+            tarea
             <Button variant="danger">Borrar</Button>
             </ListGroup.Item>
        
