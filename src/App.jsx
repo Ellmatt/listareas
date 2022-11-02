@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container } from "react-bootstrap";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import FormularioTarea from "./components/FormularioTarea";
 
 function App() {

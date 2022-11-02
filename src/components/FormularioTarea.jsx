@@ -4,13 +4,11 @@ import { crearProductoAPI } from "../helpers/queris";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 
-
-
 const FormularioTarea = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+
     reset,
   } = useForm({
     defaultValues: {
@@ -28,14 +26,11 @@ const FormularioTarea = () => {
           "success"
         );
         reset();
-       
-       
       } else {
         Swal.fire("Ocurrio un error", "Vuelva a intentarlo más tarde", "error");
       }
       window.location.reload();
     });
-  
   };
 
   return (
