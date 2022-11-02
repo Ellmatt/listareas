@@ -4,14 +4,14 @@ import ListGroup from "react-bootstrap/ListGroup";
 import { consultarApi } from "../helpers/queris";
 import ItemTarea from "./ItemTarea";
 
-const ListaTarea = (props) => {
+const ListaTarea = () => {
   
   const [tareas, setTareas] = useState([]);
-  // console.log(tareas)
+ 
    useEffect(() => {
      
      consultarApi().then((respuesta) => {
-       console.log(respuesta)
+     
        setTareas(respuesta);
      });
    }, []);

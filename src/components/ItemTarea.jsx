@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 
 const ItemTarea = (props) => {
  
-  // console.log(props)
+  
   const borrarProducto = () => {
     Swal.fire({
       title: "Esta seguro de eliminar este producto?",

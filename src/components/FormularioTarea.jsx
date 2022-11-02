@@ -7,7 +7,6 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
 const FormularioTarea = () => {
-  
   const {
     register,
     handleSubmit,
@@ -18,27 +17,20 @@ const FormularioTarea = () => {
       nombreTarea: "",
     },
   });
-  const navegacion = useNavigate();
+  // const navegacion = useNavigate();
+
   const onSubmit = (datos) => {
-    // los datos ya estan validados
-    console.log(datos);
-    // enviar lo datos a la api
-    // .then es para dar todo el tiempo del mundo y lugo de tener la respuesta hacer el codigo entre ()
-    // en el parametro se puede usar cualquier nombre pero para mayor presicion usar la misma palabra del return de queris
     crearProductoAPI(datos).then((respuesta) => {
-      console.log(respuesta);
       if (respuesta.status === 201) {
-        // el producto se creo
         Swal.fire(
           "Producto creado",
           "El producto a sido creado correctamente",
           "success"
         );
-        // reset();
-        // // redireccionar
-        navegacion("/");
+        reset();
+        window.location.reload();
+        // navegacion("/");
       } else {
-        // mostrar error al usuario
         Swal.fire("Ocurrio un error", "Vuelva a intentarlo más tarde", "error");
       }
     });
@@ -69,7 +61,7 @@ const FormularioTarea = () => {
           </Button>
         </Form.Group>
       </Form>
-      <ListaTarea respuesta={onSubmit}></ListaTarea>
+      <ListaTarea></ListaTarea>
     </div>
   );
 };

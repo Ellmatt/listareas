@@ -6,19 +6,13 @@ import FormularioTarea from "./components/FormularioTarea";
 function App() {
   return (
    
-      <BrowserRouter>
+      <Container>
         <h1 className="display-4 text-center">Lista de tareas</h1>
         <hr />
        
-        <Routes>
-          <Route
-            exact
-            path="/"
-            
-          ></Route>
-        </Routes>
+        
         <FormularioTarea></FormularioTarea>
-      </BrowserRouter>
+      </Container>
     
   );
 }
