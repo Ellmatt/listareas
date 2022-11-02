@@ -1,51 +1,75 @@
 import ListaTarea from "./ListaTarea";
 import { Form, Button } from "react-bootstrap";
-import { useState, useEffect } from "react";
+import { consultarApi, crearProductoAPI } from "../helpers/queris";
+import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
+
+import { useNavigate } from "react-router-dom";
 
 const FormularioTarea = () => {
-// aqui va los datos del ls
-const tareasLS= JSON.parse(localStorage.getItem('arregloTareaKey')) || []
-
-  // aqui va la logica
-  const [tarea, setTarea] = useState("");
-  const [arregloTarea, setArregloTarea] = useState(tareasLS);
-
-  // ciclo de vida
-  useEffect(()=>{
-    // el codigo asi escrito solo sirve para el montaje y desmontaje
-   // console.log('prueba de ciclo de vida del componente')
-    // guardar en Ls
-    localStorage.setItem('arregloTareaKey', JSON.stringify(arregloTarea))
-  }, [arregloTarea])
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setArregloTarea([...arregloTarea, tarea]);
-    // limpiar el imput
-    setTarea('');
+  
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm({
+    defaultValues: {
+      nombreTarea: "",
+    },
+  });
+  const navegacion = useNavigate();
+  const onSubmit = (datos) => {
+    // los datos ya estan validados
+    console.log(datos);
+    // enviar lo datos a la api
+    // .then es para dar todo el tiempo del mundo y lugo de tener la respuesta hacer el codigo entre ()
+    // en el parametro se puede usar cualquier nombre pero para mayor presicion usar la misma palabra del return de queris
+    crearProductoAPI(datos).then((respuesta) => {
+      console.log(respuesta);
+      if (respuesta.status === 201) {
+        // el producto se creo
+        Swal.fire(
+          "Producto creado",
+          "El producto a sido creado correctamente",
+          "success"
+        );
+        // reset();
+        // // redireccionar
+        navegacion("/");
+      } else {
+        // mostrar error al usuario
+        Swal.fire("Ocurrio un error", "Vuelva a intentarlo más tarde", "error");
+      }
+    });
   };
-  const borrarTarea = (nombre)=>{
-    let arregloModificado = arregloTarea.filter((item)=>(item !== nombre))
-    // actualizo el state
-    setArregloTarea(arregloModificado)
-  }
 
   return (
     <div>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit(onSubmit)}>
         <Form.Group className="mb-3 d-flex" controlId="formBasicEmail">
           <Form.Control
             type="text"
             placeholder="Ingrese una tarea"
-            onChange={(e) => setTarea(e.target.value)}
-            value={tarea}
+            {...register("nombreTarea", {
+              required: "Este dato es obligatorio",
+              minLength: {
+                value: 2,
+                message: "Debe ingresar como minimo 2 caracteres",
+              },
+              maxLength: {
+                value: 20,
+                message: "Debe ingresar como maximo 20 caracteres",
+              },
+            })}
           />
+          <Form.Text></Form.Text>
           <Button variant="primary" type="submit">
             Enviar
           </Button>
         </Form.Group>
       </Form>
-      <ListaTarea arregloTarea={arregloTarea} borrarTarea={borrarTarea}></ListaTarea>
+      <ListaTarea respuesta={onSubmit}></ListaTarea>
     </div>
   );
 };
