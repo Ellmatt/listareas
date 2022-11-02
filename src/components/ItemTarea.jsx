@@ -18,10 +18,10 @@ const ItemTarea = (props) => {
       cancelButtonText: "Cancelar!",
     }).then((result) => {
       if (result.isConfirmed) {
-        // realizar la consulta a la api
+      
         borrarProductoAPI(props.id._id).then((respuesta) => {
           if (respuesta.status === 200) {
-            // actualizar el state productos o la tabla
+     
             consultarApi().then((respuesta) => {
               props.setTareas(respuesta);
             });
@@ -40,7 +40,6 @@ const ItemTarea = (props) => {
   return (
     <ListGroup.Item className="d-flex justify-content-between">
       {props.nombreTarea}
-      {/* siempre para agregar funcion con parametro por props se debe agregar funcion en forma de flecha */}
       <Button variant="danger" onClick={borrarProducto}>
         Borrar
       </Button>

@@ -1,10 +1,10 @@
 import ListaTarea from "./ListaTarea";
 import { Form, Button } from "react-bootstrap";
-import { consultarApi, crearProductoAPI } from "../helpers/queris";
+import { crearProductoAPI } from "../helpers/queris";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 
-import { useNavigate } from "react-router-dom";
+
 
 const FormularioTarea = () => {
   const {
@@ -28,12 +28,14 @@ const FormularioTarea = () => {
           "success"
         );
         reset();
-        window.location.reload();
-        // navegacion("/");
+       
+       
       } else {
         Swal.fire("Ocurrio un error", "Vuelva a intentarlo más tarde", "error");
       }
+      window.location.reload();
     });
+  
   };
 
   return (

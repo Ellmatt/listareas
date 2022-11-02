@@ -5,20 +5,22 @@ import { consultarApi } from "../helpers/queris";
 import ItemTarea from "./ItemTarea";
 
 const ListaTarea = () => {
-  
   const [tareas, setTareas] = useState([]);
- 
-   useEffect(() => {
-     
-     consultarApi().then((respuesta) => {
-     
-       setTareas(respuesta);
-     });
-   }, []);
+
+  useEffect(() => {
+    consultarApi().then((respuesta) => {
+      setTareas(respuesta);
+    });
+  }, []);
   return (
     <ListGroup>
       {tareas.map((tarea, _id) => (
-        <ItemTarea  key={_id} nombreTarea={tarea.nombreTarea} id={tarea} setTareas={setTareas}/>
+        <ItemTarea
+          key={_id}
+          nombreTarea={tarea.nombreTarea}
+          id={tarea}
+          setTareas={setTareas}
+        />
       ))}
     </ListGroup>
   );
