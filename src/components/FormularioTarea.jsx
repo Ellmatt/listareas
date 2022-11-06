@@ -1,13 +1,12 @@
 import ListaTarea from "./ListaTarea";
 import { Form, Button } from "react-bootstrap";
-import { consultarApi, crearProductoAPI } from "../helpers/queris";
+import { consultarApi, creartareaAPI } from "../helpers/queris";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import { useState } from "react";
 import { useEffect } from "react";
 
 const FormularioTarea = () => {
-  // const [arregloTareas, setarregloTarea] = useState([])
   const [tareas, setTareas] = useState([]);
 
   useEffect(() => {
@@ -27,14 +26,14 @@ const FormularioTarea = () => {
   // const navegacion = useNavigate();
 
   const onSubmit = (datos) => {
-    crearProductoAPI(datos).then((respuesta) => {
+    creartareaAPI(datos).then((respuesta) => {
       if (respuesta.status === 201) {
         consultarApi().then((respuesta) => {
           setTareas(respuesta);
         });
         Swal.fire(
-          "Producto creado",
-          "El producto a sido creado correctamente",
+          "tarea creado",
+          "El tarea a sido creado correctamente",
           "success"
 
         );
@@ -42,7 +41,6 @@ const FormularioTarea = () => {
       } else {
         Swal.fire("Ocurrio un error", "Vuelva a intentarlo más tarde", "error");
       }
-      // window.location.reload();
     });
   };
 

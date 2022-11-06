@@ -1,14 +1,14 @@
 import { Button, ListGroup } from "react-bootstrap";
-import { borrarProductoAPI, consultarApi } from "../helpers/queris";
+import { borrarTareaAPI, consultarApi } from "../helpers/queris";
 import Swal from "sweetalert2";
 
 
 const ItemTarea = (props) => {
  
   
-  const borrarProducto = () => {
+  const borrarTarea = () => {
     Swal.fire({
-      title: "Esta seguro de eliminar este producto?",
+      title: "Esta seguro de eliminar este Tarea?",
       text: "No se puede revertir este paso!",
       icon: "warning",
       showCancelButton: true,
@@ -19,13 +19,13 @@ const ItemTarea = (props) => {
     }).then((result) => {
       if (result.isConfirmed) {
       
-        borrarProductoAPI(props.id._id).then((respuesta) => {
+        borrarTareaAPI(props.id._id).then((respuesta) => {
           if (respuesta.status === 200) {
      
             consultarApi().then((respuesta) => {
               props.setTareas(respuesta);
             });
-            Swal.fire("Borrado!", "Su producto a sido borrado!", "success");
+            Swal.fire("Borrado!", "Su Tarea a sido borrado!", "success");
           } else {
             Swal.fire(
               "Se produjo un error",
@@ -40,7 +40,7 @@ const ItemTarea = (props) => {
   return (
     <ListGroup.Item className="d-flex justify-content-between">
       {props.nombreTarea}
-      <Button variant="danger" onClick={borrarProducto}>
+      <Button variant="danger" onClick={borrarTarea}>
         Borrar
       </Button>
     </ListGroup.Item>

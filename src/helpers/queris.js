@@ -12,7 +12,7 @@ export const consultarApi = async () => {
   }
 };
 
-export const crearProductoAPI = async (tarea) => {
+export const crearTareaAPI = async (tarea) => {
   try {
     const respuesta = await fetch(URL, {
       method: "POST",
@@ -28,8 +28,8 @@ export const crearProductoAPI = async (tarea) => {
   }
 };
 
-export const borrarProductoAPI = async (id) => {
-  console.log(id);
+export const borrarTareaAPI = async (id) => {
+
   try {
     const respuesta = await fetch(URL + "/" + id, {
       method: "DELETE",
@@ -41,20 +41,3 @@ export const borrarProductoAPI = async (id) => {
   }
 };
 
-//   export const obtenerProductoApi = async (id) => {
-//     try {
-//       // fetch para peticiones
-//       // await para esperar
-//       const respuesta = await fetch(URL + "/" + id);
-//       // .json extrae datos en la propieda de la respuesta
-//       const productoBuscado = {
-//         dato: await respuesta.json(),
-//         status: respuesta.status,
-//       };
-
-//       // console.log(respuesta)
-//       return productoBuscado;
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
