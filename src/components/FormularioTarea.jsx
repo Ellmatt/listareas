@@ -1,6 +1,6 @@
 import ListaTarea from "./ListaTarea";
 import { Form, Button } from "react-bootstrap";
-import { consultarApi, creartareaAPI } from "../helpers/queris";
+import { consultarApi, crearTareaAPI } from "../helpers/queris";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import { useState } from "react";
@@ -23,16 +23,15 @@ const FormularioTarea = () => {
       nombreTarea: "",
     },
   });
-  // const navegacion = useNavigate();
 
   const onSubmit = (datos) => {
-    creartareaAPI(datos).then((respuesta) => {
+    crearTareaAPI(datos).then((respuesta) => {
       if (respuesta.status === 201) {
         consultarApi().then((respuesta) => {
           setTareas(respuesta);
         });
         Swal.fire(
-          "tarea creado",
+          "Tarea creada",
           "El tarea a sido creado correctamente",
           "success"
 
